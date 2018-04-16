@@ -6,7 +6,7 @@
   <link href="/Aston.github.io/atom.xml" rel="self"/>
   
   <link href="http://sdhmdhr123.github.io/Aston.github.io/"/>
-  <updated>2018-04-12T14:43:37.530Z</updated>
+  <updated>2018-04-16T02:59:13.864Z</updated>
   <id>http://sdhmdhr123.github.io/Aston.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>科研（一）</title>
+    <link href="http://sdhmdhr123.github.io/Aston.github.io/2018/04/16/%E7%A7%91%E7%A0%941/"/>
+    <id>http://sdhmdhr123.github.io/Aston.github.io/2018/04/16/科研1/</id>
+    <published>2018-04-16T02:43:07.000Z</published>
+    <updated>2018-04-16T02:59:13.864Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="数据信息"><a href="#数据信息" class="headerlink" title="数据信息"></a>数据信息</h1><p>2018年PhysioNet /计算机心脏病学挑战的数据由麻省总医院（MGH）计算临床神经生理学实验室（CCNL）和临床数据动画实验室（CDAC）提供。 该数据集包括在MGH睡眠实验室监测的1,985个受试者，用于诊断睡眠障碍。 数据平衡地分为训练集（n = 994）和测试集（n = 989）。 收集的患者的临床特征和结果列于下表1中。</p><p><strong>Table 1:</strong> <em>Clinical characteristics of the dataset, and those of the training, and testing set.</em></p><table><thead><tr><th>Clinical Feature</th><th>Total(n = 1893)</th><th>Train(n = 994)</th><th>Test(n = 989)</th></tr></thead><tbody><tr><td>Age</td><td>55(+/-14.4)</td><td>55(+/-14.3)</td><td>55(+/-14.4)</td></tr><tr><td>Body Mass Index</td><td>33(+/-7.6)</td><td>33(+/-7.8)</td><td>33(+/-7.5)</td></tr><tr><td>Epworth Sleepiness Scale[1]</td><td>8.6(+/-5.3)</td><td>8.5(+/-5.3)</td><td>8.7(+/-5.3)</td></tr><tr><td>Gender (% Male)</td><td>65</td><td>67</td><td>63</td></tr><tr><td><strong>Drug Use (%)</strong></td><td></td><td></td><td></td></tr><tr><td>Antidepressant抗抑郁</td><td>26.1</td><td>25.7</td><td>26.5</td></tr><tr><td>Antihistamine 抗组胺</td><td>4.8</td><td>4.8</td><td>4.8</td></tr><tr><td>Benzodiazepine 镇静类药物</td><td>16.1</td><td>16.9</td><td>15.4</td></tr><tr><td>Diabetic 糖尿病药物</td><td>11.7</td><td>11.9</td><td>11.5</td></tr><tr><td>Herbal 草本药物</td><td>4.2</td><td>4.3</td><td>4.0</td></tr><tr><td>Hypertension 高血压类</td><td>40.9</td><td>41.0</td><td>40.6</td></tr><tr><td>Neuroleptic 安定类药物</td><td>4.2</td><td>4.5</td><td>3.8</td></tr><tr><td>Opiate 麻醉类药物</td><td>7.4</td><td>8.1</td><td>6.7</td></tr><tr><td>Neuroactive 神经兴奋类</td><td>19.1</td><td>20.8</td><td>17.5</td></tr><tr><td>Sleep aids 助睡眠类</td><td>28.3</td><td>29.0</td><td>27.8</td></tr><tr><td>Stimulant 兴奋剂</td><td>4.7</td><td>3.9</td><td>5.5</td></tr><tr><td><strong>Reason For Visit (%)</strong></td><td></td><td></td><td></td></tr><tr><td>Diagnostic (%) 就诊</td><td>41.8</td><td>41.16</td><td>42.47</td></tr><tr><td>Split Night CPAP (%) [2]</td><td>38.35</td><td>37.95</td><td>39.03</td></tr><tr><td>All Night CPAP (%)</td><td>19.85</td><td>20.88</td><td>18.5</td></tr></tbody></table><h2 id="Sleep-Stages"><a href="#Sleep-Stages" class="headerlink" title="Sleep Stages"></a>Sleep Stages</h2><p>根据美国睡眠医学学会（AASM）睡眠评分手册，MGH的临床工作人员对睡眠阶段进行了注释。 更具体而言，以下六个睡眠阶段在30秒连续间隔中被注释：wakefulness, stage 1, stage 2, stage 3, rapid eye movement (REM), and undefined.（觉醒，阶段1，阶段2，阶段3，快速眼动（REM）和未定义）。 表2列出了睡眠期间受试者的特征。</p><p><img src="C:\Users\Aston\Desktop\1523840382156.png" alt="1523840382156"></p><h2 id="Arousals"><a href="#Arousals" class="headerlink" title="Arousals"></a>Arousals</h2><p>MGH认证的睡眠专家标记了会打断受试者的睡眠的唤醒所出现的波形。 注意到的觉醒分为：自然觉醒，呼吸相关觉醒（RERA），磨牙症，<strong>换气不足，低通气（hypoventilations hypopneas？区别</strong>），呼吸暂停（中枢性，阻塞性和混合性），发声，打鼾，周期性腿部运动，Cheyne-Stokes呼吸（潮式呼吸）或部分气道阻塞。</p><p><strong>Table 3:</strong> Number and types of arousals in the training set.</p><table><thead><tr><th>Target arousals</th><th></th></tr></thead><tbody><tr><td>Bruxism 磨牙</td><td>30</td></tr><tr><td>Cheyne-Stokes breathing 潮式呼吸[3]</td><td>3</td></tr><tr><td>Hypoventilation换气不足</td><td>4</td></tr><tr><td>Noise 噪音</td><td>1</td></tr><tr><td>Partial airway obstruction 部分气道堵塞</td><td>11</td></tr><tr><td>Periodic leg movement (PLM) 周期性腿动</td><td>36</td></tr><tr><td>Respiratory effort (RERA) 呼吸暂停</td><td>43,822</td></tr><tr><td>Snoring 打鼾</td><td>28</td></tr><tr><td>Spontaneous 自然觉醒</td><td>70</td></tr><tr><td>Total</td><td>44,005</td></tr><tr><td><strong>Non-target arousals</strong></td><td></td></tr><tr><td>Hypopnea 低通气</td><td>56,936</td></tr><tr><td>Central apnea</td><td>22,763</td></tr><tr><td>Mixed apnea</td><td>2,641</td></tr><tr><td>Obstructive apnea</td><td>32,547</td></tr><tr><td>Total</td><td>114,887</td></tr></tbody></table><p><strong>这个target是指标签数据还是目标数据？</strong></p><h2 id="Signals"><a href="#Signals" class="headerlink" title="Signals"></a>Signals</h2><p>受试者在夜间睡眠时记录各种生理信号，包括：脑电图（EEG），眼电图（EOG），肌电图（EMG），心电图（ECG）和血氧饱和度（SaO2）。 在表4中，我们列出了可用信号的完整列表。 使用国际10/20电极放置系统收集6个EEG通道（F3-M2，F4-M1，C3-M2，C4-M1，O1-M2，O2-M1）。 单导联心电图收集电极放置在胸骨附近的右锁骨下方并在左侧胸壁上方。 收集左眼EOG，将右耳EEG电极（M2）作为参考。 肌电图记录在下巴，胸部和腹部进行。 排除SaO2后，所有信号均采样至200 Hz，并以微伏测量。 为了分析方便，<strong>SaO2 was resampled to 到200Hz?</strong>，并以百分比的形式记录。</p><p><img src="C:\Users\Aston\Desktop\1523841414382.png" alt="1523841414382"></p><p>为了压缩数据，所有信号都使用 the scale and offset approach从64位float转换为16位signed int。 挑战赛的数据存储在Matlab适应的WFDB信号文件中。</p><h2 id="Accessing-the-Data"><a href="#Accessing-the-Data" class="headerlink" title="Accessing the Data"></a>Accessing the Data</h2><p>数据库包含两种类数据，训练集和测试集，每个大小约为135G，每个训练集样本包含信号，头文件，唤醒文件</p><ol><li>tr03-0005.mat：包含信号数据的Matlab V4文件。</li><li>tr03-0005.hea：记录头文件 - 描述信号数据格式的文本文件。</li><li>tr03-0005.arousal：唤醒和睡眠阶段注释，采用WFDB注释格式。</li><li>tr03-0005-arousal.mat：一个Matlab V7结构的文件，包含挑战赛的睡眠阶段和目标唤醒事件，采样频率为200 Hz。</li></ol><p>[<strong>1]epworth 嗜睡量表</strong></p><p>爱泼沃斯嗜睡量表（Epworth Sleepiness Scale，ESS）是由澳大利亚墨尔本的Epworth医院设计的。临床应用结果表明，ESS是一种十分简便的患者自我评估白天嗜睡程度的问卷表。 </p><p><strong>附表：Epworth嗜睡量表（ESS）</strong></p><p>　　 在下列情况下你打瞌睡或睡着的可能性有多大？根据表中假设的8种场景，请在右边“打瞌睡的可能性”选项中做出选择：“0”代表不会打瞌睡，“1”代表打瞌睡的可能性很小，“2”代表打瞌睡的可能性中等，“3”代表很可能打瞌睡。</p><p>　　 1 坐着阅读书刊时</p><p>　　 2 看电视时</p><p>　　 3 在沉闷公共场所坐着不动时(如剧场、开会)</p><p>　　 4 连续乘坐汽车1小时无间断 5 条件允许情况下，下午躺下休息时</p><p>　　 6 坐着与人谈话时</p><p>　　 7 未饮酒午餐后安静地坐着</p><p>　　 8 遇到堵车，在停车的几分钟里</p><p>　　 注：上述分数相加得到总分。ESS评分标准为：总分0-8分正常；9-12分轻度异常；13-15分中度异常；大于16分重度异常。</p><p><strong>[2 ] CPAP</strong></p><p>持续正压通气(Continuous Positive Airway Pressure)，即用面罩将持续的正压气流送入气道．用此种方式给氧的机器称CPAP呼吸机。指在自主呼吸条件下，患者应有稳定的呼吸驱动力和适当潮气量，在整个呼吸周期内人为地施以一定程度的气道内正压，从而有利于防止气道萎陷，增加功能残气量，改善肺顺应性，并提高氧合作用。在这种模式下，呼吸机只维持一定的气道正压，不进行机械通气。仅限于有自主呼吸的患者。如果病人出现呼吸暂停，CPAP呼吸机可以根据预设的频率进行必要的机械通气，来保障患者的安全。</p><p>split night代表一开始不用呼吸机睡眠几小时，然后睡眠过程中，若果有OSAS的症状而且是中度到重度的，会弄醒你然后开始 使用呼吸机 </p><p>all night 睡觉开始时就开始用</p><p><strong>[3] 潮式呼吸</strong></p><p>潮式呼吸（Cheyne-Stokes respiration）又称陈-施呼吸，特点是呼吸逐步减弱以至停止和呼吸逐渐增强两者交替出现，周而复始，呼吸呈潮水涨落样。多见于中枢神经疾病、脑循环障碍和中毒等患者。潮式呼吸周期可长达30秒～2分钟，暂停期可持续5～30秒。</p><p>病因</p><p>一般认为是呼吸中枢对二氧化碳的反应性降低，亦即呼吸中枢兴奋的阈值高于正常值。血中二氧化碳的分压低于能兴奋呼吸中枢的阈值，因而呼吸暂停。待血中二氧化碳分压超过正常水平达到阈值时，才能兴奋呼吸中枢，使呼吸恢复，经一阵呼吸后，血中二氧化碳分压又下降到阈值水平以下，呼吸中枢又停止活动，呼吸停止。</p><p>鉴别诊断</p><p>间停呼吸又称Biots呼吸。表现为有规律的均匀呼吸几次后，停止一段时间，又开始均匀呼吸，即周而复始的间停呼吸。该呼吸与潮式呼吸不同，它每次呼吸深度相等，而非深浅起伏，呼吸暂停时间比潮式呼吸长，呼吸次数也明显减少，间停呼吸发生机制与潮式呼吸大致相同，但患者呼吸中枢抑制比潮式呼吸者更重、病情更严重，预后不良，多在呼吸完全停止前出现。引起间停呼吸的疾病与潮式呼吸大致相同。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;数据信息&quot;&gt;&lt;a href=&quot;#数据信息&quot; class=&quot;headerlink&quot; title=&quot;数据信息&quot;&gt;&lt;/a&gt;数据信息&lt;/h1&gt;&lt;p&gt;2018年PhysioNet /计算机心脏病学挑战的数据由麻省总医院（MGH）计算临床神经生理学实验室（CCNL）和临床数据
+      
+    
+    </summary>
+    
+      <category term="学习" scheme="http://sdhmdhr123.github.io/Aston.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="physionet" scheme="http://sdhmdhr123.github.io/Aston.github.io/tags/physionet/"/>
+    
+      <category term="2018 challenge" scheme="http://sdhmdhr123.github.io/Aston.github.io/tags/2018-challenge/"/>
+    
+  </entry>
   
   <entry>
     <title>git bash、cygwin、minGW、shell、cmd</title>
