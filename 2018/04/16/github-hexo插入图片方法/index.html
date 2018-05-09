@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="Aston">
 <meta property="og:description" content="用markdown+hexo传到github这一套写博客的话感觉挺帅的，但是我发现有一个巨大的坑，就是在使用本地图片时，传到github就没法用了。 搜了半天，发现最简便的方法就是把_config.yml的 create_asset_folder 改成true，然后安装一个插件（我看了一眼我那个代码好像并没有安装成功，反正能用），这样在建立文章时就会随之产生一个文件夹，你把图片放进去，然后在写文章">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-16T13:22:33.098Z">
+<meta property="og:updated_time" content="2018-04-18T07:56:40.677Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Github+hexo插入本地图片方法">
 <meta name="twitter:description" content="用markdown+hexo传到github这一套写博客的话感觉挺帅的，但是我发现有一个巨大的坑，就是在使用本地图片时，传到github就没法用了。 搜了半天，发现最简便的方法就是把_config.yml的 create_asset_folder 改成true，然后安装一个插件（我看了一眼我那个代码好像并没有安装成功，反正能用），这样在建立文章时就会随之产生一个文件夹，你把图片放进去，然后在写文章">
@@ -366,6 +366,8 @@
 <p>但是我感觉这样还是很麻烦，这里有一个markdown编辑神器，typora，可以拖拽插入图片，如果是网络上的图片就直接插入进去了，但如果是本地的，typora有三个选项，一个是生成<code>./pic.png</code> 、<code>asset/pc.png</code>、<code>filename.asset/pic.png</code>。</p>
 <p>由于我发现你只要把图片放在那个同名文件夹内，传到github里面你的文章和图片就会在一个文件夹里了，所以你只要在用typora时选第一个<code>./pic.png</code> 然后把这些图片复制到同名文件夹中就可以了。</p>
 <p>如果你不需要上传到github，你可以利用typora导出pdf格式，非常好用！</p>
+<hr>
+<p>ps：另外，有一个困惑我很久的事情就是我用相对路径的图片统统不成功，我之前一直是传到github然后复制那个地址贴在文章里了，，后来我发现了。。只有config.yml里吧那个relative_link改成true就成了。。。</p>
 
       
     </div>
@@ -433,6 +435,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="../../20/os-walk/" rel="prev" title="Os_walk使用">
+                Os_walk使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -499,7 +505,7 @@
               
                 <a href="../../../../archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -510,7 +516,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="../../../../categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

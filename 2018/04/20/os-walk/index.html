@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../favivon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="../../../../atom.xml" title="Aston" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="python中os.walk是一个简单易用的文件、目录遍历器，可以帮助我们高效的处理文件、目录方面的事情。 1.载入要使用os.walk,首先要载入该函数 可以使用以下两种方法  import os from os import walk  2.使用 os.walk的函数声明为: walk(top, topdown=True, onerror=None, followlinks=False) 参数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Os_walk使用">
+<meta property="og:url" content="http://sdhmdhr123.github.io/2018/04/20/os-walk/index.html">
+<meta property="og:site_name" content="Aston">
+<meta property="og:description" content="python中os.walk是一个简单易用的文件、目录遍历器，可以帮助我们高效的处理文件、目录方面的事情。 1.载入要使用os.walk,首先要载入该函数 可以使用以下两种方法  import os from os import walk  2.使用 os.walk的函数声明为: walk(top, topdown=True, onerror=None, followlinks=False) 参数">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-20T08:17:18.114Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Os_walk使用">
+<meta name="twitter:description" content="python中os.walk是一个简单易用的文件、目录遍历器，可以帮助我们高效的处理文件、目录方面的事情。 1.载入要使用os.walk,首先要载入该函数 可以使用以下两种方法  import os from os import walk  2.使用 os.walk的函数声明为: walk(top, topdown=True, onerror=None, followlinks=False) 参数">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sdhmdhr123.github.io/2018/04/20/os-walk/"/>
+
+
+
+
+
+  <title>Os_walk使用 | Aston</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7943be694d3e6409e8aa40c358bf7728";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aston</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录学习的技能以及平时的感悟</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sdhmdhr123.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aston">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../../../uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aston">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Os_walk使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-20T16:16:25+08:00">
+                2018-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../categories/参考/" itemprop="url" rel="index">
+                    <span itemprop="name">参考</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>python中os.walk是一个简单易用的文件、目录遍历器，可以帮助我们高效的处理文件、目录方面的事情。</p>
+<p>1.载入<br>要使用os.walk,首先要载入该函数</p>
+<p>可以使用以下两种方法</p>
+<ul>
+<li>import os</li>
+<li>from os import walk</li>
+</ul>
+<p>2.使用</p>
+<p>os.walk的函数声明为:</p>
+<p>walk(top, topdown=True, onerror=None, followlinks=False)</p>
+<p>参数</p>
+<ul>
+<li>top 是你所要便利的目录的地址</li>
+<li>topdown 为真，则优先遍历top目录，否则优先遍历top的子目录(默认为开启)</li>
+<li>onerror 需要一个 callable 对象，当walk需要异常时，会调用</li>
+<li>followlinks 如果为真，则会遍历目录下的快捷方式(linux 下是 symbolic link)实际所指的目录(默认关闭)</li>
+</ul>
+<p>os.walk 的返回值是一个生成器(generator),也就是说我们需要不断的遍历它，来获得所有的内容。</p>
+<p>每次遍历的对象都是返回的是一个三元组(root,dirs,files)</p>
+<ul>
+<li>root 所指的是当前正在遍历的这个文件夹的本身的地址</li>
+<li>dirs 是一个 list ，内容是该文件夹中所有的目录的名字(不包括子目录)</li>
+<li>files 同样是 list , 内容是该文件夹中所有的文件(不包括子目录)</li>
+</ul>
+<p>如果topdown 参数为真，walk 会遍历top文件夹，与top文件夹中每一个子目录。</p>
+<p>举个例子</p>
+<p>如果我们有如下的文件结构:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">a</span> -&gt;   <span class="selector-tag">b</span>   -&gt;   <span class="number">1</span><span class="selector-class">.txt</span>,  <span class="number">2</span>.txt</span><br><span class="line">       c   -&gt;   <span class="number">3</span>.txt</span><br><span class="line">       d   -&gt;   </span><br><span class="line">     <span class="number">4</span>.txt</span><br><span class="line">     <span class="number">5</span>.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (root, dirs, <span class="built_in">files</span>) <span class="keyword">in</span> os.walk(<span class="string">'a'</span>):</span><br><span class="line">    <span class="comment">#第一次运行时，当前遍历目录为 a</span></span><br><span class="line">    所以 root == <span class="string">'a'</span></span><br><span class="line">         dirs == [ <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>]</span><br><span class="line">         <span class="built_in">files</span> == [ <span class="string">'4.txt'</span>, <span class="string">'5.txt'</span>]</span><br><span class="line">    </span><br><span class="line">    。。。</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 接着遍历 dirs 中的每一个目录</span></span><br><span class="line">    b:  root  = <span class="string">'a\\b'</span></span><br><span class="line">        dirs  = []</span><br><span class="line">        <span class="built_in">files</span> = [ <span class="string">'1.txt'</span>, <span class="string">'2.txt'</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># dirs为空，返回</span></span><br><span class="line">    <span class="comment"># 遍历c</span></span><br><span class="line">    c:  root  = <span class="string">'a\\c'</span></span><br><span class="line">        dirs  = []</span><br><span class="line">        <span class="built_in">files</span> = [ <span class="string">'3.txt'</span> ]</span><br><span class="line">    </span><br><span class="line">    PS : 如果想获取文件的全路径，只需要 </span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> <span class="built_in">files</span>:</span><br><span class="line">        path = os.path.join(root,f)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 遍历d</span></span><br><span class="line">    d:  root  = <span class="string">'a\\b'</span></span><br><span class="line">        dirs  = []</span><br><span class="line">        <span class="built_in">files</span> = []</span><br><span class="line"></span><br><span class="line">    遍历完毕，退出循环</span><br></pre></td></tr></table></figure>
+<p>3.简单的例子</p>
+<p>保持目录 a 的目录结构，在 b 中创建对应的文件夹,并把a中所有的文件加上后缀 _bak</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">Root = <span class="string">'a'</span></span><br><span class="line">Dest = <span class="string">'b'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (root, dirs, files) <span class="keyword">in</span> os.walk(Root):<span class="type"></span></span><br><span class="line"><span class="type">    new_root </span>= root.replace(Root, Dest, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> not os.path.exists(<span class="keyword">new</span><span class="type">_root</span>):<span class="type"></span></span><br><span class="line"><span class="type">        os</span>.mkdir(<span class="keyword">new</span><span class="type">_root</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> d <span class="keyword">in</span> dirs:<span class="type"></span></span><br><span class="line"><span class="type">        d </span>= os.path.join(<span class="keyword">new</span><span class="type">_root</span>, d)</span><br><span class="line">        <span class="keyword">if</span> not os.path.exists(d):<span class="type"></span></span><br><span class="line"><span class="type">            os</span>.mkdir(d)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> files:<span class="type"></span></span><br><span class="line"><span class="type">        </span># 把文件名分解为 文件名.扩展名</span><br><span class="line">        <span class="meta"># 在这里可以添加一个 filter，过滤掉不想复制的文件类型，或者文件名</span></span><br><span class="line">        (shotname, extension) = os.path.splitext(f)</span><br><span class="line">        <span class="meta"># 原文件的路径</span></span><br><span class="line">        old_path = os.path.join(root, f)</span><br><span class="line">        <span class="keyword">new</span><span class="type">_name</span> = shotname + <span class="string">'_bak'</span> + extension</span><br><span class="line">        <span class="meta"># 新文件的路径</span></span><br><span class="line">        <span class="keyword">new</span><span class="type">_path</span> = os.path.join(<span class="keyword">new</span><span class="type">_root</span>, <span class="keyword">new</span><span class="type">_name</span>)</span><br><span class="line">        <span class="keyword">try</span>:<span class="type"></span></span><br><span class="line"><span class="type">            </span># 复制文件</span><br><span class="line">            open(<span class="keyword">new</span><span class="type">_path</span>, <span class="string">'wb'</span>).write(open(old_path, <span class="string">'rb'</span>).read())</span><br><span class="line">        except IOError as e:<span class="type"></span></span><br><span class="line"><span class="type">            print</span>(e)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+    <div>
+   
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+    
+    </div>
+    
+
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://github.com/sdhmdhr123/Aston.github.io/blob/master/uploads/wechatpay.png?raw=true" alt="Aston 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../../16/github-hexo插入图片方法/" rel="next" title="Github+hexo插入本地图片方法">
+                <i class="fa fa-chevron-left"></i> Github+hexo插入本地图片方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../科研（二）/" rel="prev" title="科研（二）">
+                科研（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="../../../../uploads/avatar.png"
+                alt="Aston" />
+            
+              <p class="site-author-name" itemprop="name">Aston</p>
+              <p class="site-description motion-element" itemprop="description">学而不思则亡，思而不学则呆。博客主要用来记录所学知识，也方便作为自己的it字典。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="../../../../archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="../../../../atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aston</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
